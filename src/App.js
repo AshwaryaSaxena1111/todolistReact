@@ -1,14 +1,23 @@
-import './App.css';
-import Heading from './components/Heading/Heading'
-import InputTitle from './components/InputTitle/InputTitle';
+import React, { useState } from "react";
+import "./App.css";
+import AddTodo from "./components/AddTodo/AddTodo";
+import Heading from "./components/Heading/Heading";
+import ListOfToDo from "./components/ListOfToDo/ListOfToDo";
 
-function App() {
+function App(props) {
+  const [todo, setTodo] = useState({});
+
+  const formOnChangeHandler = (e) => {
+    const name = e.target.name;
+    const todovalue = e.target.value;
+    setTodo((prev) => ({ ...prev, [name]: todovalue }));
+  };
+  console.log(formOnChangeHandler);
   return (
     <>
-     <div >
-        <Heading/>
-        <InputTitle/> 
-     </div> 
+      <Heading />
+      <AddTodo onChangeHandler={formOnChangeHandler} />
+      <ListOfToDo todo={todo} />
     </>
   );
 }
